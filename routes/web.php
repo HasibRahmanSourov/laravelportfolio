@@ -36,10 +36,20 @@ Route::get('/portfolios/edit/{id}', 'PortfolioPageController@edit')->name('admin
 Route::post('/portfolios/update/{id}', 'PortfolioPageController@update')->name('admin.portfolios.update');
 Route::delete('/portfolios/destroy/{id}', 'PortfolioPageController@destroy')->name('admin.portfolios.destroy');
 
+Route::get('/abouts/create', 'AboutPageController@create')->name('admin.abouts.create');
+Route::put('/abouts/create', 'AboutPageController@store')->name('admin.abouts.store');
+Route::get('/abouts/list', 'AboutPageController@list')->name('admin.abouts.list');
+Route::get('/abouts/edit/{id}', 'AboutPageController@edit')->name('admin.abouts.edit');
+Route::post('/abouts/update/{id}', 'AboutPageController@update')->name('admin.abouts.update');
+Route::delete('/abouts/destroy/{id}', 'AboutPageController@destroy')->name('admin.abouts.destroy');
+
 Route::get('/about', 'PageController@about')->name('about');
-Route::get('/contact', 'PageController@contact')->name('contact');
+
 Route::get('/team', 'PageController@team')->name('team');
 });
+
+Route::post('/contact', 'ContactPageController@store')->name('contact.store');
+
 Auth::routes();
 
 

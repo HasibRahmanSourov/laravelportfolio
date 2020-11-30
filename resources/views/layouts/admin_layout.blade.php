@@ -117,10 +117,18 @@
                                 </nav>
                             </div> 
 
-                            <a class="nav-link" href="{{route('about')}}">
-                                <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
+                                <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
                                 About
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{route('admin.abouts.create')}}">Create</a>
+                                <a class="nav-link" href="{{route('admin.abouts.list')}}">List</a>
+                                </nav>
+                            </div> 
+
                             <a class="nav-link" href="{{route('team')}}">
                                 <div class="sb-nav-link-icon"><i class="fa fa-images"></i></div>
                                 Team

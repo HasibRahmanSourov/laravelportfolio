@@ -88,7 +88,8 @@ class PortfolioPageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $portfolios = Portfolio::find($id);
+        return view('pages.portfolio.edit',compact('portfolios'));
     }
 
     /**
@@ -100,7 +101,36 @@ class PortfolioPageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'title'=> 'required|string',
+            'sub_title'=> 'required|string',
+            'description'=> 'required|string',
+            'client'=> 'required|string',
+            'category'=> 'required|string',
+        ]);
+
+        $portfolio =Portfolio::find($id);
+        $portfolio->title =$request->title;
+        $portfolio->sub_title =$request->sub_title;
+        $portfolio->description =$request->description;
+        $portfolio->client =$request->client;
+        $portfolio->category =$request->category;
+        
+        if($request->file("big_image")){
+            $big_file =$request->file("big_image");
+            storage::putFile('public/imag/',$big_file);
+            $portfolio->big_image = "storage/imag/".$big_file->hashName();
+        }
+       
+        if($request->file("small_image")){
+            $small_file =$request->file("small_image");
+            storage::putFile('public/imag/',$small_file);
+            $portfolio->small_image = "storage/imag/".$small_file->hashName();
+        }
+       
+
+        $portfolio->save();
+         return redirect()->route('admin.portfolios.list')->with('success','Portfolio Has Been Created Successfully');
     }
 
     /**
@@ -111,6 +141,10 @@ class PortfolioPageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $portfolios =Portfolio::find($id);
+        @unlink(public_path($portfolio->big_image));
+        @unlink(public_path($portfolio->small_image));
+        $portfolios->delete();
+        return redirect()->route('admin.portfolios.list')->with('success','Portfolio Delete Successfully');
     }
 }
